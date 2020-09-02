@@ -31,4 +31,50 @@
   }
   const com = commentsForPost(post, comments);
   console.log(com);
+
+  let users = [
+    {name: '太郎'},
+    {name: '次郎'},
+    {name: '三郎'},
+  ];
+
+  let us = users.find((user) => {
+    return user.name === '次郎'
+  });
+
+  console.log(us);
+
+  let posts = [
+    { id: 1, title: '古い投稿'},
+    { id: 2, title: '新しい投稿'}
+  ];
+
+  let comment = {
+    postId: 2, content: 'イイね'
+  }
+
+  function postForComment(posts, comment) {
+    return posts.find(function(post) {
+      return post.id === comment.postId;
+    });
+  }
+
+  let pos = postForComment(posts, comment);
+  console.log(pos);
+
+
+  let computers = [
+    { name: 'Apple', ram: 24},
+    { name: 'Compaq', ram: 4},
+    { name: 'Acer', ram: 32}
+  ];
+
+ computers.every(function(computer) {
+   return computer.rom >= 16;
+ });
+
+
+
+
+
 }
