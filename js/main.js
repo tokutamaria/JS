@@ -73,6 +73,40 @@
    return computer.rom >= 16;
  });
 
+let numbers = [10, 20, 30];
+let sum = 0;
+
+let num = numbers.reduce(function(sum, number) {
+  return sum + number;
+}, 50);
+
+console.log(num);
+
+let primaryColors = [
+  { color: 'red'},
+  { color: 'yellow'},
+  { color: 'blue'}
+];
+
+
+let pri = primaryColors.reduce(function(previous, primaryColor) {
+  previous.push(primaryColor.color)
+  return previous;
+}, []);
+
+console.log(pri);
+
+function balancedParens(string) {
+  return !string.split('').reduce(function(previous, char){
+    if (previous > 0){return previous;}
+    if (char === '('){return previous + 1; }
+    if (char === ')'){return previous - 1; }
+  },0);
+}
+
+let bal = balancedParens('()');
+
+console.log(bal);
 
 
 
