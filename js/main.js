@@ -108,7 +108,30 @@ let bal = balancedParens('()');
 
 console.log(bal);
 
+function getMassage(){
+  const year = new Date().getFullYear();
 
+  return `今年は${year}年です`;
+}
 
+const man =  getMassage();
+console.log(man);
+
+const add = function(a,b) {
+  return a + b;
+}
+console.log(add(1,2));
+
+const numb = [1, 2, 3];
+
+let mam = numb.map((number) => {
+  return 2 * number;
+});
+
+console.log(mam);
+
+const team = {
+  members:['太郎', '花子'],
+}
 
 }
