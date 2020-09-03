@@ -32,29 +32,26 @@
   const com = commentsForPost(post, comments);
   console.log(com);
 
-  let users = [
-    {name: '太郎'},
-    {name: '次郎'},
-    {name: '三郎'},
-  ];
+  let users = [{ name: "太郎" }, { name: "次郎" }, { name: "三郎" }];
 
   let us = users.find((user) => {
-    return user.name === '次郎'
+    return user.name === "次郎";
   });
 
   console.log(us);
 
   let posts = [
-    { id: 1, title: '古い投稿'},
-    { id: 2, title: '新しい投稿'}
+    { id: 1, title: "古い投稿" },
+    { id: 2, title: "新しい投稿" },
   ];
 
   let comment = {
-    postId: 2, content: 'イイね'
-  }
+    postId: 2,
+    content: "イイね",
+  };
 
   function postForComment(posts, comment) {
-    return posts.find(function(post) {
+    return posts.find(function (post) {
       return post.id === comment.postId;
     });
   }
@@ -62,76 +59,193 @@
   let pos = postForComment(posts, comment);
   console.log(pos);
 
-
   let computers = [
-    { name: 'Apple', ram: 24},
-    { name: 'Compaq', ram: 4},
-    { name: 'Acer', ram: 32}
+    { name: "Apple", ram: 24 },
+    { name: "Compaq", ram: 4 },
+    { name: "Acer", ram: 32 },
   ];
 
- computers.every(function(computer) {
-   return computer.rom >= 16;
- });
+  computers.every(function (computer) {
+    return computer.rom >= 16;
+  });
 
-let numbers = [10, 20, 30];
-let sum = 0;
+  let numbers = [10, 20, 30];
+  let sum = 0;
 
-let num = numbers.reduce(function(sum, number) {
-  return sum + number;
-}, 50);
+  let num = numbers.reduce(function (sum, number) {
+    return sum + number;
+  }, 50);
 
-console.log(num);
+  console.log(num);
 
-let primaryColors = [
-  { color: 'red'},
-  { color: 'yellow'},
-  { color: 'blue'}
-];
+  let primaryColors = [
+    { color: "red" },
+    { color: "yellow" },
+    { color: "blue" },
+  ];
+
+  let pri = primaryColors.reduce(function (previous, primaryColor) {
+    previous.push(primaryColor.color);
+    return previous;
+  }, []);
+
+  console.log(pri);
+
+  function balancedParens(string) {
+    return !string.split("").reduce(function (previous, char) {
+      if (previous > 0) {
+        return previous;
+      }
+      if (char === "(") {
+        return previous + 1;
+      }
+      if (char === ")") {
+        return previous - 1;
+      }
+    }, 0);
+  }
+
+  let bal = balancedParens("()");
+
+  console.log(bal);
+
+  function getMassage() {
+    const year = new Date().getFullYear();
+
+    return `今年は${year}年です`;
+  }
+
+  const man = getMassage();
+  console.log(man);
+
+  const add = function (a, b) {
+    return a + b;
+  };
+  console.log(add(1, 2));
+
+  const numb = [1, 2, 3];
+
+  let mam = numb.map((number) => {
+    return 2 * number;
+  });
+
+  console.log(mam);
+
+  const team = {
+    members: ["太郎", "花子"],
+  };
+
+  function createBookShop(inventory) {
+    return {
+      inventory,
+      inventoryValue() {
+        return this.inventory.reduce((total, book) => total + book.price, 0);
+      },
+      priceForTitle: function (title) {
+        return this.inventory.find((book) => book.title === title).price;
+      },
+    };
+  }
+
+  const inventory = [
+    { title: "ハリーポッター", price: 1000 },
+    { title: "JavaScript入門", price: 1500 },
+  ];
+
+  const bookShop = createBookShop(inventory);
+
+  let boo = bookShop.inventoryValue();
+  let rice = bookShop.priceForTitle("ハリーポッター");
+
+  console.log(boo);
+  console.log(rice);
+
+  function User(id) {
+    this.id = id;
+  }
+
+  function generateId() {
+    return Math.random() * 99999;
+  }
+
+function createAdminUser(user) {
+  user.admin = true;
+
+  return user;
+}
+
+createAdminUser(new User(generateId()));
 
 
-let pri = primaryColors.reduce(function(previous, primaryColor) {
-  previous.push(primaryColor.color)
-  return previous;
-}, []);
-
-console.log(pri);
-
-function balancedParens(string) {
-  return !string.split('').reduce(function(previous, char){
-    if (previous > 0){return previous;}
-    if (char === '('){return previous + 1; }
-    if (char === ')'){return previous - 1; }
+function addNumbers(...numbers) {
+  return numbers.reduce(function(sum, number) {
+    return sum + number;
   },0);
 }
 
-let bal = balancedParens('()');
+let A = addNumbers(1,2,3,4,5,6,7,8);
+console.log(A);
 
-console.log(bal);
+function validateShoppingList(...items) {
+  if (items.indexOf('牛乳') < 0) {
+    return ['牛乳', ...items];
+  }
+  return items;
+}
+let V = validateShoppingList('オレンジ','パン','牛乳');
+console.log(V);
 
-function getMassage(){
-  const year = new Date().getFullYear();
+let expense = {
+  type: '交際費',
+  amount: '4500 JPY'
+};
 
-  return `今年は${year}年です`;
+const {type, amount} = expense;
+console.log(type);
+console.log(amount);
+
+let saveFile = {
+  extension: 'jpg',
+  name: 'profile',
+  size: 14040
 }
 
-const man =  getMassage();
-console.log(man);
-
-const add = function(a,b) {
-  return a + b;
+function fileSummary({name, extension, size}) {
+  return `${name}.${extension}の容量は${size}です。`
 }
-console.log(add(1,2));
 
-const numb = [1, 2, 3];
+let F = fileSummary(saveFile);
+console.log(F);
 
-let mam = numb.map((number) => {
-  return 2 * number;
-});
+const companies = [
+  'Google',
+  'Facebook',
+  'Uber'
+];
 
-console.log(mam);
+const[ame,ame2] = companies;
+console.log([ame,ame2]);
 
-const team = {
-  members:['太郎', '花子'],
-}
+const campanies = [
+  {name: 'Google', location: 'マウンテンビュー'},
+  {name: 'Facebook', location: 'メンロパーク'},
+  {name: 'Uber', location: 'サンフランシスコ'},
+];
+
+const points = [
+  [4,5],
+  [10,1],
+  [0, 40]
+];
+
+points.map();
+
+
+
+
+
+
+
+
 
 }
