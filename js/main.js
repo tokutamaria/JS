@@ -232,14 +232,30 @@ const campanies = [
   {name: 'Uber', location: 'サンフランシスコ'},
 ];
 
-const points = [
-  [4,5],
-  [10,1],
-  [0, 40]
-];
+class Car {
+  constructor(options){
+    this.title = options.title;
+  }
 
-points.map();
+  drive() {
+    return 'ウィーン';
+  }
+}
 
+class Toyota extends Car {
+  constructor(options) {
+    super(options);
+    this.color = options.color;
+  }
+
+  honk() {
+    return 'ブブー!!';
+  }
+}
+
+const toyota = new Toyota({color: 'レッド', title: 'アクア'});
+console.log(toyota);
+console.log(toyota.honk());
 
 
 
