@@ -257,11 +257,102 @@ const toyota = new Toyota({color: 'レッド', title: 'アクア'});
 console.log(toyota);
 console.log(toyota.honk());
 
+const colors = [ 'red', 'green' , 'blue'];
+const numberss = [1,2,3,4,5,5,5];
+let total = 0;
+
+for (let color of colors) {
+  console.log(color);
+}
+
+for(let number of numberss) {
+  total += number;
+
+}
+
+console.log(total);
+
+function* yes() {
+
+}
+console.log(yes());
 
 
+function* shopping() {
+
+  const stuffFromStore = yield 'お金';
+
+  const cleanClothes = yield '汚れた服';
+
+  return [stuffFromStore, cleanClothes];
+}
+
+const gen =shopping();
+gen.next('日用品');
+
+gen.next('綺麗な服');
+
+console.log(gen);
+
+function* Colors() {
+  yield 'red';
+  yield 'blue';
+  yield 'green';
+}
+
+const ge = Colors();
+console.log(ge.next());
+console.log(ge.next());
+console.log(ge.next());
+console.log(ge.next());
+
+const myColors = [];
+for (let color of Colors()) {
+  myColors.push(color);
+}
+
+console.log(myColors);
 
 
+const testingTeam = {
+  lead: '紀子',
+  tester: '貴志',
+  [Symbol.iterator]: function* () {
+    yield this.lead;
+    yield globalThis.tester;
+  }
+}
 
+const engineeringTeam = {
+   testingTeam,
+  size: 3,
+  department: '開発部', 
+  lead: '太郎',
+  manager: '花子',
+  engineer: '次郎'
+};
 
+//----デリゲーション
+
+function* TeamIterator(team) {
+  yield team.lead;
+  yield team.manager;
+  yield team.engineer;
+  yield team.testingTeam;
+}
+
+// function* TestingTeamIterator(team) {
+//   yield team.lead;
+//   yield team.tester;
+// }
+
+//---
+
+const names = [];
+for(let name of TeamIterator(engineeringTeam)) {
+  names.push(name);
+}
+
+console.log(names);
 
 }
