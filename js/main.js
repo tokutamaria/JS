@@ -319,27 +319,33 @@ const testingTeam = {
   tester: '貴志',
   [Symbol.iterator]: function* () {
     yield this.lead;
-    yield globalThis.tester;
+    yield this.tester;
   }
 }
 
 const engineeringTeam = {
    testingTeam,
   size: 3,
-  department: '開発部', 
+  department: '開発部',
   lead: '太郎',
   manager: '花子',
-  engineer: '次郎'
+  engineer: '次郎',
+  [Symbol.iterator]: function* () {
+    yield this.lead;
+    yield this.manager;
+    yield this.engineer;
+    yield* this.testingTeam;
+  }
 };
 
 //----デリゲーション
 
-function* TeamIterator(team) {
-  yield team.lead;
-  yield team.manager;
-  yield team.engineer;
-  yield team.testingTeam;
-}
+// function* TeamIterator(team) {
+//   yield team.lead;
+//   yield team.manager;
+//   yield team.engineer;
+//   yield team.testingTeam;
+// }
 
 // function* TestingTeamIterator(team) {
 //   yield team.lead;
@@ -349,10 +355,41 @@ function* TeamIterator(team) {
 //---
 
 const names = [];
-for(let name of TeamIterator(engineeringTeam)) {
+for(let name of engineeringTeam) {
   names.push(name);
 }
 
 console.log(names);
+
+
+class Comment {
+  constructor (content, children) {
+    this.content = content;
+    this.children = children;
+  }
+
+
+   *[Symbol.iterator] () {
+    yield this.content;
+    for (let child of this.children) {
+      yield child;
+    }
+  }
+}
+
+const children = [
+  new Comment('賛成！！,[]'),
+  new Comment('反対！！,[]'),
+  new Comment('うーん。。。,[]'),
+];
+
+const tree = new Comment('非常に良い記事です！', children);
+
+const values = [];
+for(let value of tree) {
+  values.push(value);
+}
+console.log(values);
+
 
 }
