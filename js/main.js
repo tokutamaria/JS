@@ -391,5 +391,23 @@ for(let value of tree) {
 }
 console.log(values);
 
+let promise = new Promise( (resolve, reject) => {
+  setTimeout(() => {
+    reject();
+  }, 3000)
+});
+
+promise
+.then( () => console.log('処理が完了しました！！！'))
+.then(() => console.log('ここも実行させる！'))
+.catch(() => console.log('問題発生！！'));
+
+url ="https://jsonplaceholder.typicode.com/posts/";
+
+fetch(url)
+  .then(data => console.log(data));
+
+
+
 
 }
